@@ -280,12 +280,6 @@ docker compose up --build
 curl "http://127.0.0.1:8000/tasks/<TASK_ID>"
 ```
 
-## Deploy
-
-Deploy placeholder:
-
-- [https://your-demo-url.example.com](https://your-demo-url.example.com)
-
 ## Challenges and solutions
 
 ### 1. Demonstrating agents without coupling the demo to a real LLM
