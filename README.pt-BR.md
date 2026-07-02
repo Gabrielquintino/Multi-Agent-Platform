@@ -1,12 +1,12 @@
 # multi-agent-platform-demo
 
-[Read in Portuguese (Brazil)](README.pt-BR.md)
+[Read in English](README.md)
 
-Public FastAPI project that showcases a simple, professional multi-agent orchestration flow. The application receives a user task, runs it through three specialized agents, logs the full execution path, and stores both tasks and execution records in SQLite.
+Projeto publico em FastAPI para demonstrar, de forma simples e didatica, uma orquestracao de multiplos agentes de IA. A aplicacao recebe uma tarefa, executa tres agentes especializados, registra todo o fluxo e salva tarefas e execucoes em SQLite.
 
-## Featured API Example
+## Exemplo principal da API
 
-This is the main demo flow recruiters and reviewers should try first.
+Este e o fluxo principal para destacar no portfolio.
 
 ### `POST /tasks`
 
@@ -20,9 +20,9 @@ curl -X 'POST' \
 }'
 ```
 
-### Example response
+### Resposta de exemplo
 
-`id`, timestamps, and execution payload details may vary between runs.
+`id`, timestamps e detalhes internos dos payloads podem variar a cada execucao.
 
 ```json
 {
@@ -180,55 +180,55 @@ curl -X 'POST' \
 }
 ```
 
-## What this project does
+## O que o projeto faz
 
-`multi-agent-platform-demo` exposes a simple API that accepts a task, processes it through three agents, saves execution traces, and returns a final structured answer.
+O `multi-agent-platform-demo` expoe uma API simples que recebe uma tarefa, processa a solicitacao com tres agentes, salva o historico de execucao e retorna uma resposta final estruturada.
 
-Core capabilities:
+Principais capacidades:
 
-- `POST /tasks` receives and processes a task
-- `GET /tasks/{id}` returns the persisted result and execution history
-- Every agent step stores input, output, status, timestamps, and execution order
-- The architecture is intentionally simple and ready for new agents
+- `POST /tasks` recebe e processa uma tarefa
+- `GET /tasks/{id}` retorna o resultado persistido e o historico completo
+- Cada etapa registra entrada, saida, status, timestamps e ordem de execucao
+- A arquitetura foi pensada para ser simples e facil de estender com novos agentes
 
-## What agents are
+## O que sao agentes
 
-In this project, an agent is a focused component responsible for one part of a larger workflow.
+Neste projeto, um agente e um componente especializado com responsabilidade clara dentro de um fluxo maior.
 
-- `PlannerAgent`: breaks the incoming task into actionable steps
-- `ResearchAgent`: produces simulated findings for each planned step
-- `ReviewerAgent`: reviews previous outputs and assembles the final answer
+- `PlannerAgent`: quebra a tarefa em passos acionaveis
+- `ResearchAgent`: gera achados simulados para cada passo do plano
+- `ReviewerAgent`: revisa as saidas anteriores e monta a resposta final
 
-This separation makes the demo easier to understand, test, extend, and discuss in interviews.
+Essa separacao torna a demonstracao mais facil de entender, testar, evoluir e explicar em entrevistas tecnicas.
 
-## Agent flow
+## Fluxo dos agentes
 
 ```mermaid
 flowchart LR
-    A["User submits task"] --> B["POST /tasks"]
-    B --> C["TaskService creates Task"]
+    A["Usuario envia tarefa"] --> B["POST /tasks"]
+    B --> C["TaskService cria Task"]
     C --> D["PlannerAgent"]
     D --> E["ResearchAgent"]
     E --> F["ReviewerAgent"]
-    F --> G["SQLite stores task and execution logs"]
-    G --> H["API returns final response"]
-    H --> I["GET /tasks/{id} fetches history"]
+    F --> G["SQLite salva task e execution logs"]
+    G --> H["API retorna a resposta final"]
+    H --> I["GET /tasks/{id} consulta o historico"]
 ```
 
-## Architecture
+## Arquitetura
 
 ```text
 app/
-|- agents/        # Base interface and concrete agents
-|- api/           # FastAPI routes
-|- services/      # Orchestration and business logic
-|- db.py          # Engine, session, and database bootstrap
-|- models.py      # SQLAlchemy models
-|- schemas.py     # Pydantic schemas
-|- main.py        # Application entry point
+|- agents/        # Interface base e agentes concretos
+|- api/           # Rotas FastAPI
+|- services/      # Orquestracao e regras de negocio
+|- db.py          # Engine, sessao e bootstrap do banco
+|- models.py      # Modelos SQLAlchemy
+|- schemas.py     # Schemas Pydantic
+|- main.py        # Ponto de entrada da aplicacao
 ```
 
-## Tech stack
+## Tecnologias usadas
 
 - Python 3.12
 - FastAPI
@@ -239,9 +239,9 @@ app/
 - Docker
 - GitHub Actions
 
-## Installation and local run
+## Como instalar e rodar
 
-### Local environment
+### Ambiente local
 
 ```bash
 python -m venv .venv
@@ -261,7 +261,7 @@ pip install ".[dev]"
 uvicorn app.main:app --reload
 ```
 
-Available at:
+Disponivel em:
 
 - `http://127.0.0.1:8000`
 - `http://127.0.0.1:8000/docs`
@@ -272,9 +272,9 @@ Available at:
 docker compose up --build
 ```
 
-## More curl examples
+## Mais exemplos via curl
 
-### Get a stored task
+### Consultar uma tarefa salva
 
 ```bash
 curl "http://127.0.0.1:8000/tasks/<TASK_ID>"
@@ -282,47 +282,47 @@ curl "http://127.0.0.1:8000/tasks/<TASK_ID>"
 
 ## Screenshots / GIF
 
-Screenshot placeholder:
+Placeholder de screenshot:
 
 ![API screenshot placeholder](docs/images/api-screenshot-placeholder.svg)
 
-GIF placeholder:
+Placeholder de GIF:
 
 ![Demo GIF placeholder](docs/images/demo-gif-placeholder.svg)
 
 ## Deploy
 
-Deploy placeholder:
+Placeholder de deploy:
 
 - [https://your-demo-url.example.com](https://your-demo-url.example.com)
 
-## Challenges and solutions
+## Desafios enfrentados e solucoes
 
-### 1. Demonstrating agents without coupling the demo to a real LLM
+### 1. Demonstrar agentes sem acoplar a demo a um LLM real
 
-Solution:
-The agents are deterministic and simulated by default. That keeps the project lightweight, testable, and ready for a future provider integration.
+Solucao:
+Os agentes sao deterministas e simulados por padrao. Isso mantem o projeto leve, testavel e pronto para uma integracao futura com provider real.
 
-### 2. Keeping the code simple without losing extensibility
+### 2. Manter o codigo simples sem perder extensibilidade
 
-Solution:
-A shared `BaseAgent` interface and a separate orchestration layer keep the HTTP layer small and make new agents easy to add.
+Solucao:
+Uma interface compartilhada `BaseAgent` e uma camada separada de orquestracao mantem a camada HTTP enxuta e facilitam a adicao de novos agentes.
 
-### 3. Making the workflow observable
+### 3. Tornar o fluxo observavel
 
-Solution:
-Each execution step persists `input_payload`, `output_payload`, timestamps, status, and sequence so the run can be inspected end to end.
+Solucao:
+Cada etapa persiste `input_payload`, `output_payload`, timestamps, status e sequencia, permitindo inspecao completa do fluxo.
 
-## Future improvements
+## Melhorias futuras
 
-- Add asynchronous execution with a queue
-- Integrate a real LLM through a configurable provider layer
-- Expose streaming execution events
-- Add authentication and user ownership
-- Build a small dashboard for task history
-- Publish a real deployment on Railway, Render, or Fly.io
+- Adicionar execucao assincrona com fila
+- Integrar um LLM real por meio de uma camada de provider configuravel
+- Expor eventos de execucao em streaming
+- Adicionar autenticacao e ownership de usuarios
+- Criar um dashboard simples para historico de tarefas
+- Publicar um deploy real em Railway, Render ou Fly.io
 
-## Author
+## Autor
 
 Gabriel Quintino
 
