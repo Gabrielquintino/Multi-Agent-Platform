@@ -280,16 +280,6 @@ docker compose up --build
 curl "http://127.0.0.1:8000/tasks/<TASK_ID>"
 ```
 
-## Screenshots / GIF
-
-Screenshot placeholder:
-
-![API screenshot placeholder](docs/images/api-screenshot-placeholder.svg)
-
-GIF placeholder:
-
-![Demo GIF placeholder](docs/images/demo-gif-placeholder.svg)
-
 ## Deploy
 
 Deploy placeholder:

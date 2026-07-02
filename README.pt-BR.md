@@ -282,20 +282,6 @@ curl "http://127.0.0.1:8000/tasks/<TASK_ID>"
 
 ## Screenshots / GIF
 
-Placeholder de screenshot:
-
-![API screenshot placeholder](docs/images/api-screenshot-placeholder.svg)
-
-Placeholder de GIF:
-
-![Demo GIF placeholder](docs/images/demo-gif-placeholder.svg)
-
-## Deploy
-
-Placeholder de deploy:
-
-- [https://your-demo-url.example.com](https://your-demo-url.example.com)
-
 ## Desafios enfrentados e solucoes
 
 ### 1. Demonstrar agentes sem acoplar a demo a um LLM real
