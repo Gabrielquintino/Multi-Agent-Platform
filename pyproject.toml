@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multi-agent-platform-demo"
+version = "0.1.0"
+description = "Professional FastAPI demo for multi-agent orchestration."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+  { name = "Gabriel Quintino" }
+]
+dependencies = [
+  "fastapi>=0.115.0,<1.0.0",
+  "pydantic>=2.8.0,<3.0.0",
+  "sqlalchemy>=2.0.30,<3.0.0",
+  "uvicorn[standard]>=0.30.0,<1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx>=0.27.0,<1.0.0",
+  "pytest>=8.2.0,<9.0.0",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
